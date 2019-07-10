@@ -6,25 +6,17 @@ const router = express.Router();
 // get posts
 router.get("/", async (req, res) => {
   const posts = await loadPostsCollection();
-  // .then(console.log("success"))
-  // .catch(console.log("Error"));
   res.send(await posts.find({}).toArray());
-  // .then(console.log("success"))
-  // .catch(console.log("Error"));
 });
 
 // add posts
 
 router.post("/", async (req, res) => {
   const posts = await loadPostsCollection();
-  // .then(console.log("success"))
-  // .catch(console.log("Error"));
   await posts.insertOne({
     text: req.body.text,
     createdAt: new Date()
   });
-  // .then(console.log("success"))
-  // .catch(console.log("Error"));
   res.status(201).send();
 });
 
@@ -43,8 +35,6 @@ async function loadPostsCollection() {
       useNewUrlParser: true
     }
   );
-  // .then(console.log("success"))
-  // .catch(console.log("Error"));
   return client.db("kirbyexpress").collection("posts");
 }
 
